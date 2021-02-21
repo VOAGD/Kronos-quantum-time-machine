@@ -39,6 +39,6 @@ def third_funct():
     return qml.expval(qml.PauliZ(0)) @  qml.expval(qml.PauliZ(1))
 nd_circuit = qml.QNode(third_funct, dev)
 
-result = nd_circuit
+result = nd_circuit()
  
  

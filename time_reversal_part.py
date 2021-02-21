@@ -29,10 +29,10 @@ def sec_funct(time):
 
 st_circuit = qml.QNode([first_funct @ sec_funct], dev)
     
-a = tf.Variable(a)
+init = tf.Variable(st_circuit)
 
 def third_funct():
-    qml.QubitStateVector(a, wires= [0,1])
+    qml.QubitStateVector(init, wires= [0,1])
     qml.t(wires= 0).inv()
     qml.t(wires= 1).inv()
     return qml.expval(qml.PauliZ(0)) @  qml.expval(qml.PauliZ(1))

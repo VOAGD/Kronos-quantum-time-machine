@@ -7,7 +7,6 @@ import tensorflow as tf
 
 
 dev = qml.device('default.qubit', wires= 2, shots= 1000)
-st_circuit = qml.QNode([first_funct @ sec_funct], dev)
 
 def first_funct():
     # Bell state
@@ -28,9 +27,9 @@ def sec_funct(time):
     
     a = [qml.expval(qml.PauliZ(wires=i)) for i in wires]
     return a
+
+st_circuit = qml.QNode([first_funct @ sec_funct], dev)
     
-    
-nd_circuit = qml.QNode(third_funct, dev)
 a = tf.Variable(a)
 
 def third_funct():
@@ -38,6 +37,8 @@ def third_funct():
     qml.t(wires= 0).inv()
     qml.t(wires= 1).inv()
     return qml.expval(qml.PauliZ(0)) @  qml.expval(qml.PauliZ(1))
+nd_circuit = qml.QNode(third_funct, dev)
 
+result = nd_circuit
  
  

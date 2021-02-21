@@ -3,9 +3,11 @@ import pennylane as qml
 from pennylane import numpy as np
 from pennylane import qnode
 
+import tensorflow as tf
+
 
 dev = qml.device('default.qubit', wires= 2, shots= 1000)
-first_circuit = qml.QNode([first_funct @ sec_funct], dev)
+st_circuit = qml.QNode([first_funct @ sec_funct], dev)
 
 def first_funct():
     # Bell state
@@ -28,3 +30,14 @@ def sec_funct(time):
     return a
     
     
+nd_circuit = qml.QNode(third_funct, dev)
+a = tf.Variable(a)
+
+def third_funct():
+    qml.QubitStateVector(a, wires= [0,1])
+    qml.t(wires= 0).inv()
+    qml.t(wires= 1).inv()
+    return qml.expval(qml.PauliZ(0)) @  qml.expval(qml.PauliZ(1))
+
+ 
+ 

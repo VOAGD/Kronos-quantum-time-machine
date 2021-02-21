@@ -9,7 +9,6 @@ import tensorflow as tf
 dev = qml.device('default.qubit', wires= 2, shots= 1000)
 
 def first_funct():
-    # Bell state
     qml.Hadamard(wires= 0)
     qml.CNOT(wires=[0, 1])
     

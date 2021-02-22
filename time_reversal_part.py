@@ -27,7 +27,7 @@ def sec_funct(time):
     a = [qml.expval(qml.PauliZ(wires=i)) for i in wires]
     return a
 
-st_circuit = qml.QNode([first_funct @ sec_funct], dev)
+st_circuit = qml.QNode([first_funct, sec_funct], dev)
     
 init = tf.Variable(st_circuit)
 
@@ -39,5 +39,3 @@ def third_funct():
 nd_circuit = qml.QNode(third_funct, dev)
 
 result = nd_circuit()
- 
- 
